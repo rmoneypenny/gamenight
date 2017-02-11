@@ -1,0 +1,27 @@
+
+
+<%=form_tag users_new_path do %>
+
+	<%=label_tag :username %>
+	<br>
+	<%=text_field_tag :username %>
+	<br>
+	<%=label_tag :name %>
+	<br>
+	<%=text_field_tag :name %>
+	<br>
+	<%=label_tag :email %>
+	<br>
+	<%=text_field_tag :email %>
+	<br>
+	<%=label_tag :password %>
+	<br>
+	<%=text_field_tag :password %>
+	<br>
+	<%=label_tag :password_confirmation %>
+	<br>
+	<%=text_field_tag :password_confirmation %>
+	<br>
+	<%=submit_tag "Create Account" %>
+
+<%end%>
