@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 gem 'bcrypt'
+gem 'validates_email_format_of'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,12 +1,22 @@
-
+<% current_user %>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+      <li class="<%= 'active' if current_page?(index_path) %>"> <%= link_to "Main", index_path %> </li>
+      <li class="<%= 'active' if current_page?(setup_path) %>"> <%= link_to "Setup", setup_path %> </a> </li>
+      <li> <a href="#"> Join </a> </li>
+      <li> <a href="#"> Boardgame Tools </a> </li>
+      <li> <a href="#"> Tournament Builder </a> </li>      
+    </ul>
+
+
     <ul class="nav navbar-nav navbar-right">
       <li class = "dropdown"> 
-      	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Log In
+      	<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= logged_in? ? (current_user.name) : ("Log In") %>
         <span class="caret"></span></a>
         <ul class = "dropdown-menu">
-        	<li><%= link_to "Register", users_new_path %> </li>
+          <%= render 'shared/navbar_login' %>
         </ul>
     </ul>
   </div>

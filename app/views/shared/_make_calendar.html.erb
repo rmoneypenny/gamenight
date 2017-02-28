@@ -1,0 +1,23 @@
+<% calendar ||= Calendar.new %>
+<% monthdate = calendar.calendarStart %>
+	<%= monthdate[1] %>
+		<table class = "table table-striped">
+			<tr>
+				<th> Sunday</th>
+				<th> Monday</th>
+				<th> Tuesday</th>
+				<th> Wednesday</th>
+				<th> Thursday</th>
+				<th> Friday</th>
+				<th> Saturday</th>
+			</tr>
+			<% monthdate[0].each do |c| %>
+			<tr>
+				<% c.each do |w| %>
+				<td> <%= w %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+		</table>
+<%= link_to "Prev", setup_path({:prevMonth => calendar.prevMonth}), remote: true %>
+<%= link_to "Next", setup_path({:nextMonth => calendar.nextMonth}), remote: true %>

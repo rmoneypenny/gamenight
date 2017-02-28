@@ -8,7 +8,7 @@ development:
   password:
   timeout: 5000
 
-  test:
+test:
   adapter: postgresql
   encoding: unicode
   database: db/gamenight_test
@@ -16,4 +16,3 @@ development:
   username: randy2
   password:
   timeout: 5000
-

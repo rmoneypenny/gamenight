@@ -6,6 +6,8 @@ body {
 	background-color: white;
 }
 
+
+
 .test{
 	background-color: green;
 }
@@ -18,7 +20,22 @@ body {
 	background-color: red;
 }
 
+#notice{
+	background-color: #F3F4F4;
+	color: green;
+}
+
+#error{
+	background-color: #F3F4F4;
+	color: red;
+}
+
 .navbar-custom{
 	background-color: #cdddf7;
 }
 
+.table{
+	border: 1px solid black;
+	width: 100%;
+	text-align: right;
+}
