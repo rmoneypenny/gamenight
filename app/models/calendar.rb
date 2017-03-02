@@ -4,7 +4,6 @@ class Calendar
 
 	def initialize(date = nil)
 		date == nil ? (@date = Time.now) : (@date = Date.parse(date))
-		puts @date
 	end
 
 	def calendarStart

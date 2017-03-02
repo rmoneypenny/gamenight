@@ -10,12 +10,10 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-		puts @user.valid?
-		puts @user.errors.messages
 		if !@user.save
 			render 'new'
 		else
-			redirect_to games_index_path
+			redirect_to index_path
 		end
 		
 	end

@@ -1,17 +1,56 @@
-<div class="row">
-	<div class="col-md-6"> Bunch of setup text
-	</div>
-	<div class="col-md-6">
+<div id = "error">
+	<% if @room.errors.any? %>
+		<% @room.errors.full_messages.each do |e| %>
+			<%= e %>
+			<br>
+		<% end %>
+	<% end %>
+</div>
+
+<div class="col-md-6"> 
+	<br>
+		<%= form_tag setup_path do %>
+			<%= hidden_field_tag(:admin, current_user.id) %>
+			<%= label_tag :password %>
+			<br>
+			<%= password_field_tag :password%>
+			<br>
+			<%= label_tag :password_confirmation %>
+			<br>
+			<%= password_field_tag :password_confirmation %>
+			<br>
+			<%= submit_tag "Create" %>
+		<% end %>
+	<br>
+		datetime from calendar ->
+
+	<br>
+		Time selector
+	<br>
+	<br>
+	<br>
+		Enter games to be played
+	<br>
+	<br>
+	Vote checkbox
+	<br>
+		----Random Weight checkbox - 3 per?
+	<br>
+	<br>
+		Invite? checkbox
+	<br>
+		----usernames/email addresses
+
+
+
+</div>
+
+<div class="col-md-6">
 	<div id = "calendar">
 		<%= render :partial => 'shared/make_calendar' %>
 	</div>
-	
-
-
-
-	</div>
 </div>
+
 <br>
-<a href="#" onclick="this.style.backgroundColor='#990000'">Paint it red</a>
 <br>
 <br>

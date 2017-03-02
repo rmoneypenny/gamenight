@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   delete '/sessions', :to => 'sessions#destroy'
 
   get '/setup', :to => 'rooms#new'
+  post '/setup', :to => 'rooms#create'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

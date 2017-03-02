@@ -26,11 +26,10 @@ ActiveRecord::Schema.define(version: 20170210051612) do
 
   create_table "rooms", force: :cascade do |t|
     t.string   "admin"
-    t.string   "password_hash"
-    t.string   "password_salt"
+    t.string   "password_digest"
     t.datetime "datetime"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "user_rooms", force: :cascade do |t|
