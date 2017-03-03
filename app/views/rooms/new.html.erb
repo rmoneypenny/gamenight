@@ -19,24 +19,20 @@
 			<br>
 			<%= password_field_tag :password_confirmation %>
 			<br>
-			<%= date_select :room, :datetime %>
+			<%= select_datetime Time.now, prefix: :datetime %>
+			<br>
+			<br>
+			<br>
+			<%= label_tag "Games" %>
+			<br>
+			<%= text_area_tag :name, nil, rows: 5, cols: 25 %>
+			<br>
+			<%= check_box_tag :vote %>
+			<%= label_tag "Vote?" %>
+			<%= hidden_field_tag(:weight, 2) %>
 			<br>
 			<%= submit_tag "Create" %>
 		<% end %>
-	<br>
-		datetime from calendar ->
-
-	<br>
-		Time selector
-	<br>
-	<br>
-	<br>
-		Enter games to be played
-	<br>
-	<br>
-	Vote checkbox
-	<br>
-		----Random Weight checkbox - 3 per?
 	<br>
 	<br>
 		Invite? checkbox

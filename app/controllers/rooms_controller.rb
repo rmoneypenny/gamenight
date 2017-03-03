@@ -4,16 +4,14 @@ class RoomsController < ApplicationController
 
   def new
    @room = Room.new
-	 @calendar = Calendar.new  
+   @calendar = Calendar.new  
   
     if params[:prevMonth]
       @month = Calendar.new(params[:prevMonth])
-      puts "prev"
     end
     
     if params[:nextMonth]
       @month = Calendar.new(params[:nextMonth])
-      puts "next"
     end
   
     respond_to do |format|
@@ -28,6 +26,8 @@ class RoomsController < ApplicationController
     if !@room.save
       render 'new'
     else
+      game = Game.new
+      game.submit(game_params[:name], game_params[:vote], game_params[:weight], @room.id)
       redirect_to index_path
     end
   end
@@ -35,7 +35,17 @@ class RoomsController < ApplicationController
   private
 
     def room_params
-      params.permit(:admin, :password, :password_confirmation)
+      valid = params.permit(:admin, :password, :password_confirmation, datetime: [:year, :month, :day, :hour, :minute] )
+      dt = DateTime.new(valid[:datetime][:year].to_i, valid[:datetime][:month].to_i, valid[:datetime][:day].to_i, valid[:datetime][:hour].to_i, valid[:datetime][:minute].to_i)
+      valid.delete(:datetime)
+      valid.merge!(:datetime => dt)
+    end
+
+    def game_params
+      valid = params.permit(:name, :vote, :weight, :room_id)
+      names = valid[:name].split("\n")
+      valid.delete(:name)
+      valid.merge!(:name => names)
     end
 
 end

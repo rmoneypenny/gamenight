@@ -5,4 +5,5 @@ class Room < ApplicationRecord
 	has_secure_password
 	validates :admin, presence: true
 	validates :password, presence: true
+	validates :datetime, presence: true
 end

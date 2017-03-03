@@ -6,6 +6,6 @@ class UserSignupTest < ActionDispatch::IntegrationTest
      assert_response :success
 
      post '/users/new', params: {username: "rmoneypenny", name: "Randy", email: "r@r.com", password: "pass", password_confirmation: "pass"}
-     assert_redirected_to games_index_path
+     assert_redirected_to index_path
    end
 end

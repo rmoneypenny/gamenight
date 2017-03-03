@@ -1,1 +1,11 @@
-<%= current_page?(index_path) %>
+
+<div class="col-md-6">
+	If logged in: 
+		-Show games joined
+</div>
+
+<div class="col-md-6">
+	<div id="calendar">
+		<%= render :partial => 'shared/make_calendar' %>
+	</div>
+</div>

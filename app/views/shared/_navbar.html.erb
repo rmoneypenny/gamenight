@@ -4,8 +4,10 @@
 
     <ul class="nav navbar-nav">
       <li class="<%= 'active' if current_page?(index_path) %>"> <%= link_to "Main", index_path %> </li>
-      <li class="<%= 'active' if current_page?(setup_path) %>"> <%= link_to "Setup", setup_path %> </a> </li>
+      <% if current_user %>
+        <li class="<%= 'active' if current_page?(setup_path) %>"> <%= link_to "Setup", setup_path %> </a> </li>
       <li> <a href="#"> Join </a> </li>
+      <% end %>
       <li> <a href="#"> Boardgame Tools </a> </li>
       <li> <a href="#"> Tournament Builder </a> </li>      
     </ul>
