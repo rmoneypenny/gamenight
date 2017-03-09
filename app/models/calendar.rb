@@ -39,6 +39,18 @@ class Calendar
 
 	end
 
+	def getRoom(day)
+		if day
+			day_start = Date.new(@date.year, @date.month, day).beginning_of_day
+			day_end = Date.new(@date.year, @date.month, day).end_of_day
+			puts day_start.to_s + " " + day_end.to_s
+			room = Room.where(datetime: day_start..day_end)
+			if !room.empty?
+				room
+			end
+		end
+	end
+
 	def nextMonth
 		@date.next_month
 	end

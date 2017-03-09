@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   get '/setup', :to => 'rooms#new'
   post '/setup', :to => 'rooms#create'
 
+  get '/tournament', :to => 'tournaments#show'
+  get '/join', :to => 'rooms#userroom'
+
 end

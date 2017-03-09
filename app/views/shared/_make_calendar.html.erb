@@ -24,7 +24,8 @@
 			<% monthdate[0].each do |c| %>
 			<tr>
 				<% c.each do |w| %>
-				<td> <%= w %> </td>
+				<% room = calendar.getRoom(w) %>
+				<td class=<%= "calendarSuccess" if room %>> <%= w %> </td>
 				<% end %>
 			</tr>
 			<% end %>
@@ -32,3 +33,4 @@
 <br>
 <br>
 <br>
+

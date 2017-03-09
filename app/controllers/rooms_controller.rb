@@ -32,6 +32,11 @@ class RoomsController < ApplicationController
     end
   end
 
+  def userroom
+    
+  end
+
+
   private
 
     def room_params

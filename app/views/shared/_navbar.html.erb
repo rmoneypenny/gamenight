@@ -6,10 +6,10 @@
       <li class="<%= 'active' if current_page?(index_path) %>"> <%= link_to "Main", index_path %> </li>
       <% if current_user %>
         <li class="<%= 'active' if current_page?(setup_path) %>"> <%= link_to "Setup", setup_path %> </a> </li>
-      <li> <a href="#"> Join </a> </li>
+      <li class="<%= 'active' if current_page?(join_path) %>"> <%= link_to "Join", join_path %> </a> </li>
       <% end %>
       <li> <a href="#"> Boardgame Tools </a> </li>
-      <li> <a href="#"> Tournament Builder </a> </li>      
+      <li class="<%= 'active' if current_page?(tournament_path) %>"> <%= link_to "Tournament Builder", tournament_path %> </a> </li>
     </ul>
 
 
