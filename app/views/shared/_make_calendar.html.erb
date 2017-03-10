@@ -24,8 +24,13 @@
 			<% monthdate[0].each do |c| %>
 			<tr>
 				<% c.each do |w| %>
-				<% room = calendar.getRoom(w) %>
-				<td class=<%= "calendarSuccess" if room %>> <%= w %> </td>
+					<% room = calendar.getRoom(w) %>
+					<td class=<%= "calendarSuccess" if room %>> 
+						<%= (hidden_field_tag 'info', room[1]) if room %>
+						<%= (hidden_field_tag 'id', room[0]) if room %>
+						<%= (hidden_field_tag 'games', room[2]) if room %>
+						<%= w %> 
+					</td>
 				<% end %>
 			</tr>
 			<% end %>
