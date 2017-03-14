@@ -1,17 +1,33 @@
+<div id = "error">
+	<% if @ur.errors.any? %>
+		<% @ur.errors.each do |attr,e| %>
+			<%= e %>
+			<br>
+		<% end %>
+	<% end %>
+</div>
+
 
 <div class="col-md-6">
 	<div id="gameDate">
-					
+		Select a date from the calendar ->
 	</div>
-	<br>
-	<br>
-	<div id="gameList">
-		blah
-	</div>
+	<div id="gameList" style="display: none">
+		<ul id="list">
 
-	<%= text_field_tag "hello", nil, id: 'roomid'%>
-	
+		</ul>
+		<%= form_tag join_path do %>
+
+			<%= hidden_field_tag :user_id, current_user.id%> 
+			<%= hidden_field_tag :room_id, current_user.id, id: 'roomid'%>
+
+			<%= submit_tag "Join" %>
+
+		<% end %>
+
+	</div>
 </div>
+
 <div class="col-md-6">
 	<div id="calendar">
 		<%= render :partial => 'shared/make_calendar' %>

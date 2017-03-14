@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   get '/tournament', :to => 'tournaments#show'
   get '/join', :to => 'rooms#userroom'
+  post '/join', :to => 'rooms#createur'
 
 end

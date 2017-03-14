@@ -9,12 +9,20 @@ $(document).on("turbolinks:load", function(){
     });
 
     $(document).on("click", ".calendarSuccess", function(){
+        $("#gameList").show();
+        var list = $("#list")
+        var games = ($(this).find("#games").val());
+        var g = games.split('!*!');
+        list.text("");
+        for(var i=0; i<g.length-1; i++){
+            list.append("<li>" + g[i] + "</li>");
+        };
         var info = $(this).find("#info").val();
         var id = $(this).find("#id").val();
-        var games = $(this).find("#games").val();
         $("#gameDate").text(info);
         $("#roomid").val(id);
-        $("#gameList").text(games);
+
+
     });
 });   
 
@@ -27,4 +35,14 @@ $(document).on("turbolinks:load", function(){
         $("#jqq").val(id);
         alert(id);
     });
+*/
+/*
+        var info = $(this).find("#info").val();
+        var id = $(this).find("#id").val();
+        var games = ($(this).find("#games").val());
+        var g = games.split('!*!');
+        var games = new Array("test","blah","blur");
+        $("#gameDate").text(info);
+        $("#roomid").val(id);
+        $("#gameList").text(g[0]);
 */

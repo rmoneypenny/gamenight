@@ -50,10 +50,8 @@ class Calendar
 				games = Game.where(room_id: room.first.id)
 				gameList = []
 				games.each do |g|
-					gameList << g.name
+					gameList << g.name + "!*!"
 				end
-				puts "GAME"
-				puts gameList
 				[room.first.id, info, gameList]
 			end
 		end

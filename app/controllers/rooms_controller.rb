@@ -33,10 +33,19 @@ class RoomsController < ApplicationController
   end
 
   def userroom
-    
+    @ur = UserRoom.new    
   end
 
+  def createur
 
+    @ur = UserRoom.new(userroom_params)
+    if !@ur.save
+      render 'userroom'
+    else
+      redirect_to index_path
+    end
+  end
+  
   private
 
     def room_params
@@ -51,6 +60,10 @@ class RoomsController < ApplicationController
       names = valid[:name].split("\n")
       valid.delete(:name)
       valid.merge!(:name => names)
+    end
+
+    def userroom_params
+      params.permit(:user_id, :room_id)
     end
 
 end
