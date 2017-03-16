@@ -4,7 +4,8 @@ class RoomsController < ApplicationController
 
   def new
    @room = Room.new
-   @calendar = Calendar.new  
+   @calendar = Calendar.new
+   @game = Game.new
   
     if params[:prevMonth]
       @month = Calendar.new(params[:prevMonth])
@@ -26,8 +27,8 @@ class RoomsController < ApplicationController
     if !@room.save
       render 'new'
     else
-      game = Game.new
-      game.submit(game_params[:name], game_params[:vote], game_params[:weight], @room.id)
+      @game = Game.new
+      @game.submit(game_params[:name], game_params[:vote], game_params[:weight], @room.id)
       redirect_to index_path
     end
   end

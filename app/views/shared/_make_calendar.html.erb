@@ -1,3 +1,4 @@
+
 <% calendar ||= Calendar.new %>
 <% monthdate = calendar.calendarStart %>
 <br>
@@ -24,8 +25,8 @@
 			<% monthdate[0].each do |c| %>
 			<tr>
 				<% c.each do |w| %>
-					<% room = calendar.getRoom(w) %>
-					<td class=<%= "calendarSuccess" if room %>> 
+					<% room = calendar.roomInfo(w,(current_user ? current_user.id : 0)) %>
+					<td class=<%= ("calendarJoin" if room && room[3]) || ("calendarSuccess" if room) %>> 
 						<%= (hidden_field_tag 'info', room[1]) if room %>
 						<%= (hidden_field_tag 'id', room[0]) if room %>
 						<%= (hidden_field_tag 'games', room[2]) if room %>
