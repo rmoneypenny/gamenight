@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   get '/index', :to => 'rooms#index' 
+  post '/index', :to => 'rooms#updateur' 
   get '/users/new', :to => 'users#new'
   post '/users/new', :to => 'users#create'
   post '/sessions/new', :to => 'sessions#create'

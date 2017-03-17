@@ -46,6 +46,10 @@ class RoomsController < ApplicationController
       redirect_to index_path
     end
   end
+
+  def updateur
+
+  end
   
   private
 

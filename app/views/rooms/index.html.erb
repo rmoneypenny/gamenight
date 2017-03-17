@@ -3,13 +3,23 @@
 	<div id="joinedGameDate">
 	</div>
 	<div>
-		<ul id="joinedList">
 
-		</ul>
+	</div>
+	<div id="buttonNumber" type="hidden">
+		<%= form_tag index_path, :id => "weight-form", :hidden => true do%>
+			<ul id="joinedList">
+
+			</ul>
+			<%= number_field_tag :weight, 5, :id => "weight", :readonly => true %>
+			<button class="btn btn-default btn-xs add-weight" style="display:none"> + </button>
+			<button class="btn btn-default btn-xs subtract-weight"> - </button>
+			<br>
+			<%= submit_tag "Submit" %>
+		<% end %>
 	</div>
 	To Do 
 	<br>
-	Thursday:
+	Figure out a way to create/access unique div, li, etc. for each game
 	<br>
 	Pull the game weight in the calendar. 
 	<br>
@@ -31,6 +41,7 @@
 	Multiple rooms on a single day
 	<br>
 	Tournament
+	<br>
 </div>
 
 <div class="col-md-6">
