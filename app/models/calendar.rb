@@ -46,11 +46,13 @@ class Calendar
 				info = room.first.datetime.strftime("%B") + " " + room.first.datetime.strftime("%-d") + ", " + room.first.datetime.strftime("%Y") + " at " + room.first.datetime.strftime("%l:%M%p")
 				games = Game.where(room_id: room.first.id)
 				gameList = []
+				gameIDs = []
 				games.each do |g|
 					gameList << g.name + "!*!"
+					gameIDs << g.id
 				end
 				joinedRoom = (true if user_id>0 && user.rooms.where(id: room.first.id).first) || false
-				[room.first.id, info, gameList, joinedRoom]
+				[room.first.id, info, gameList, gameIDs, joinedRoom]
 		end
 	end
 

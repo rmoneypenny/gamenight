@@ -27,14 +27,21 @@ $(document).on("turbolinks:load", function(){
         var list = $("#joinedList");
         var games = ($(this).find("#games").val());
         var g = games.split('!*!');
+        var gameid = ($(this).find("#gameIDs").val());
+        var gid = gameid.split(" ");
+        var buttons = "<button class=\"btn btn-default btn-xs subtract-weight\"> - </button><button class=\"btn btn-default btn-xs add-weight\" style=\"display:none\"> + </button>";
         list.text("");
         for(var i=0; i<g.length-1; i++){
-            list.append("<li>" + g[i] + "<button class=\"btn btn-default btn-xs subtract-weight\"> - </button><button class=\"btn btn-default btn-xs add-weight\" style=\"display:none\"> + </button>" + "</li>");
+            list.append("<li id=" + gid[i] + ">" + g[i] + "<textarea id=\"weight\" rows=\"1\" cols=\"10\">" + 0 + "</textarea>" + "<button class=\"btn btn-default btn-xs subtract-weight\"> - </button><button class=\"btn btn-default btn-xs add-weight\" style=\"display:none\"> + </button>" + "</li>");
+            //list.append(gid[i] + g[i] + "weight" + buttons);
+              
         };
         var info = $(this).find("#info").val();
         $("#joinedGameDate").text(info);
-        $("#weight-form").show();
     });
+
+
+
 
     $("#buttonNumber").on("click", ".subtract-weight",function(){
         var weight = parseInt($("#weight").val());
@@ -45,11 +52,11 @@ $(document).on("turbolinks:load", function(){
         };
     });
 
-    $("#buttonNumber").on("click", ".add-weight",function(){
-        var weight = parseInt($("#weight").val());
-        $("#weight").val(weight + 1);
-        $(".add-weight").hide();
-    });
+    // $("#buttonNumber").on("click", ".add-weight",function(){
+    //     var weight = parseInt($("#weight").val());
+    //     $("#weight").val(weight + 1);
+    //     $(".add-weight").hide();
+    // });
 
 });   
 

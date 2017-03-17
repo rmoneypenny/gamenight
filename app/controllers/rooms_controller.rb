@@ -48,6 +48,10 @@ class RoomsController < ApplicationController
   end
 
   def updateur
+    respond_to do |format|
+     format.html
+     format.js 
+    end
 
   end
   

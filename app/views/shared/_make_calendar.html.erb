@@ -26,10 +26,11 @@
 			<tr>
 				<% c.each do |w| %>
 					<% room = calendar.roomInfo(w,(current_user ? current_user.id : 0)) %>
-					<td class=<%= ("calendarJoin" if room && room[3]) || ("calendarSuccess" if room) %>> 
+					<td class=<%= ("calendarJoin" if room && room[4]) || ("calendarSuccess" if room) %>> 
 						<%= (hidden_field_tag 'info', room[1]) if room %>
 						<%= (hidden_field_tag 'id', room[0]) if room %>
 						<%= (hidden_field_tag 'games', room[2]) if room %>
+						<%= (hidden_field_tag 'gameIDs', room[3]) if room %>
 						<%= w %> 
 					</td>
 				<% end %>

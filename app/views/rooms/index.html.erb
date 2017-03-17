@@ -2,21 +2,26 @@
 <div class="col-md-6">
 	<div id="joinedGameDate">
 	</div>
-	<div>
+
+ 	<div id="buttonNumber" type="hidden">
+		<ul id="joinedList">
+
+		</ul>
+  	
+		<div class="input-group input-group-sm">
+  			<span class="input-group-addon">GameName</span>
+  			<input type="text" class="form-control" placeholder="Weight">
+  			<span class="input-group-btn">
+		        <button class="btn btn-primary" type="button">-</button>
+		        <button class="btn btn-secondary" type="button">+</button>
+		    </span>
+  			
+		</div>
+ 
 
 	</div>
-	<div id="buttonNumber" type="hidden">
-		<%= form_tag index_path, :id => "weight-form", :hidden => true do%>
-			<ul id="joinedList">
-
-			</ul>
-			<%= number_field_tag :weight, 5, :id => "weight", :readonly => true %>
-			<button class="btn btn-default btn-xs add-weight" style="display:none"> + </button>
-			<button class="btn btn-default btn-xs subtract-weight"> - </button>
-			<br>
-			<%= submit_tag "Submit" %>
-		<% end %>
-	</div>
+	<br>
+	<br>
 	To Do 
 	<br>
 	Figure out a way to create/access unique div, li, etc. for each game
