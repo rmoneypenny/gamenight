@@ -1,5 +1,7 @@
 $(document).on("turbolinks:load", function(){
 
+    var count=2;
+    var tempcount;
 
     $("input").focus(function(){
         $(this).css("background-color", "#cccccc");
@@ -7,6 +9,8 @@ $(document).on("turbolinks:load", function(){
     $("input").blur(function(){
         $(this).css("background-color", "#ffffff");
     });
+
+
 
     $(document).on("click", ".calendarSuccess", function(){
         $("#gameList").show();
@@ -23,64 +27,80 @@ $(document).on("turbolinks:load", function(){
         $("#roomid").val(id);
     });
 
+
+
     $(document).on("click", ".calendarJoin", function(){
+        tempcount = count;
         var list = $("#joinedList");
         var games = ($(this).find("#games").val());
         var g = games.split('!*!');
         var gameid = ($(this).find("#gameIDs").val());
         var gid = gameid.split(" ");
-        var buttons = "<button class=\"btn btn-primary subtract-weight\" type=\"button\">-</button>"
-                    + "<button class=\"btn btn-secondary add-weight\" type=\"button\" style=\"display:none\">+</button>";
+        var vote = ($(this).find("#vote").val());
+        var weight = ($(this).find("#weight").val());
+        var w = weight.split(" ");
+
         list.text("");
-        for(var i=0; i<g.length-1; i++){
-            list.append("<li id=" + gid[i] +">"
-                        + "<div class=\"input-group input-group-sm\">"
-                        + "<span class=\"input-group-addon\">" + g[i] + "</span>"
-                        + "<input type=\"text\" class=\"form-control\" id=\"weight\" value=\"1\" readonly=\"readonly\">"
-                        + "<span class=\"input-group-btn\">"
-                        + buttons
-                        + "</span>"
-                        + "</div>"
-                        + "</li>");
+        if (vote=="true"){
+            for(var i=0; i<g.length-1; i++){
+                list.append("<li id=" + gid[i] +">"
+                            + "<div class=\"input-group input-group-sm\">"
+                            + "<span class=\"input-group-addon\">" + g[i] + "</span>"
+                            + "<input type=\"text\" class=\"form-control\" id=\"weight"
+                            + gid[i] + "\""
+                            + "value="
+                            + w[i]
+                            + " readonly=\"readonly\">"
+                            + "<span class=\"input-group-btn\">"
+                            + "<button class=\"btn btn-primary subtract-weight\" type=\"button\">-</button>"
+                            + "<button class=\"btn btn-primary add-weight\" type=\"button\" style=\"display:none\">+</button>"
+                            + "</span>"
+                            + "</div>"
+                            + "</li>");
               
+            };
+        }
+        else{
+            for(var i=0; i<g.length-1; i++){
+                list.append("<li id=" + gid[i] +">"
+                            + "<ul>"
+                            + g[i]
+                            + "</ul>"
+                            + "</li>");
+              
+            };
         };
         var info = $(this).find("#info").val();
         $("#joinedGameDate").text(info);
     });
        
 
+
     $("#buttonNumber").on("click", ".subtract-weight",function(){
-        alert($(this).closest("li").attr("id"));
-        var weight = parseInt($("#weight").val());
+        var gid = ($(this).closest("li").attr("id"));
+        var weight = parseInt($("#weight"+gid).val());
         if (weight > 0){
-            $("#weight").val(weight - 1);
-            $(".add-weight").show();
-            $(this).closest("ul").find(".subtract-weight").hide();
+            $("#weight"+gid).val(weight - 1);
+            tempcount = tempcount-1;
+            if (tempcount == 0){
+                $(this).closest("ul").find(".subtract-weight").hide();
+                $(".add-weight").show();
+                tempcount=count;
+            };
         };
     });
 
-    // $("#buttonNumber").on("click", ".add-weight",function(){
-    //     var weight = parseInt($("#weight").val());
-    //     $("#weight").val(weight + 1);
-    //     $(".add-weight").hide();
-    // });
-
-  //list.append(gid[i] + g[i] + "weight" + buttons);
-          
- // = "<div class=\"input-group input-group-sm\">"
- //                    + "<span class=\"input-group-addon\">GameName</span>"
- //                    + "<input type=\"text\" class=\"form-control\" placeholder=\"Weight\">"
- //                    + "<span class=\"input-group-btn\">"
- //                    + "<button class=\"btn btn-primary\" type=\"button\">-</button>"
- //                    + "<button class=\"btn btn-secondary\" type=\"button\">+</button>"
- //                    + "</span>"
- //                    + "</div>";
 
 
-// list.append("<li id=" + gid[i] + ">" + g[i] 
-//                         + "<textarea id=\"weight\" rows=\"1\" cols=\"10\">" + 1 + "</textarea>" + buttons);
-     
-
+    $("#buttonNumber").on("click", ".add-weight",function(){
+        var gid = ($(this).closest("li").attr("id"));
+        var weight = parseInt($("#weight"+gid).val());
+        $("#weight"+gid).val(weight + 1);
+        tempcount = tempcount-1;
+        if (tempcount==0){
+            $(".add-weight").hide();
+        };
+    });
 
 });   
 

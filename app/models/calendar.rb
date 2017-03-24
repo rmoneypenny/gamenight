@@ -47,12 +47,17 @@ class Calendar
 				games = Game.where(room_id: room.first.id)
 				gameList = []
 				gameIDs = []
+				vote = false
+				weight = []
 				games.each do |g|
 					gameList << g.name + "!*!"
 					gameIDs << g.id
+					weight << g.weight
+					vote=true if g.vote==true
 				end
+				puts vote
 				joinedRoom = (true if user_id>0 && user.rooms.where(id: room.first.id).first) || false
-				[room.first.id, info, gameList, gameIDs, joinedRoom]
+				[room.first.id, info, gameList, gameIDs, joinedRoom, vote, weight]
 		end
 	end
 
