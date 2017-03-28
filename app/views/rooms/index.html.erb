@@ -1,23 +1,31 @@
 
+<% user = current_user %>
+
 <div class="col-md-6">
 	<div id="joinedGameDate">
 	</div>
 	<br>
- 	<div id="buttonNumber" type="hidden">
-		<ul id="joinedList" style="list-style-type:none">
+ 	<div id="buttonNumber">
 
+		<ul id="joinedList" style="list-style-type:none">
+			</li> Select a date from the calendar-> </li>
 		</ul> 
 
+	</div>
+	<div id="submitWeight" style="display: none">
+		<button class="btn btn-primary weight-button" data-user="<%=user.id%>">Submit</button>
 	</div>
 	<br>
 	<br>
 	To Do 
 	<br>
-	Submit Weight, 24 hour before voting again or single vote(lean towards single vote)
+	Weight submit is working, need to update the user_room to true, already pulling user, need room_id
 	<br>
 	HTML Safe. Make sure someone can't inject code as a game name
 	<br>
 	at least one game entered when creating a new room
+	<br>
+	rename tournament.js
 	<br>
 	<br>
 	Future:

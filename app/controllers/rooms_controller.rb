@@ -48,10 +48,14 @@ class RoomsController < ApplicationController
   end
 
   def updateur
-    respond_to do |format|
-     format.html
-     format.js 
-    end
+
+    game = Game.new
+    gameIDs = params[:games]
+    gameWeights = params[:weights]
+    user = params[:user]
+
+    game.multiUpdate(gameIDs, gameWeights)
+    redirect_to index_path
 
   end
   

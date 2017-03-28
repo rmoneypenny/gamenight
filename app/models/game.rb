@@ -14,4 +14,11 @@ class Game < ApplicationRecord
 			game.save
 		end
 	end
+
+	def multiUpdate(gameIDs, gameWeights)
+		for i in 0..gameIDs.length-1
+			Game.update(gameIDs[i], :weight => gameWeights[i])
+		end
+
+	end
 end

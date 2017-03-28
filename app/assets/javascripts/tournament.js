@@ -2,6 +2,7 @@ $(document).on("turbolinks:load", function(){
 
     var count=2;
     var tempcount;
+    var gameWeight = {};
 
     $("input").focus(function(){
         $(this).css("background-color", "#cccccc");
@@ -31,6 +32,7 @@ $(document).on("turbolinks:load", function(){
 
     $(document).on("click", ".calendarJoin", function(){
         tempcount = count;
+        gameWeight = {};
         var list = $("#joinedList");
         var games = ($(this).find("#games").val());
         var g = games.split('!*!');
@@ -57,7 +59,7 @@ $(document).on("turbolinks:load", function(){
                             + "</span>"
                             + "</div>"
                             + "</li>");
-              
+                gameWeight[gid[i]] = w[i];
             };
         }
         else{
@@ -81,6 +83,7 @@ $(document).on("turbolinks:load", function(){
         var weight = parseInt($("#weight"+gid).val());
         if (weight > 0){
             $("#weight"+gid).val(weight - 1);
+            gameWeight[gid] = weight - 1;
             tempcount = tempcount-1;
             if (tempcount == 0){
                 $(this).closest("ul").find(".subtract-weight").hide();
@@ -96,10 +99,33 @@ $(document).on("turbolinks:load", function(){
         var gid = ($(this).closest("li").attr("id"));
         var weight = parseInt($("#weight"+gid).val());
         $("#weight"+gid).val(weight + 1);
+        gameWeight[gid] = weight + 1;
         tempcount = tempcount-1;
         if (tempcount==0){
             $(".add-weight").hide();
+            $("#submitWeight").show();
         };
+    });
+
+
+    $("#submitWeight").on("click", ".weight-button", function(){
+        game = [];
+        weight = [];
+        for(i in gameWeight){
+            game.push(i);
+            weight.push(gameWeight[i]);
+        };
+        user = this.getAttribute("data-user");
+        $.ajax({
+            url : "/index",
+            type : "patch",
+            data : { games: game,
+                     weights: weight,
+                     user: user }
+        });
+
+
+
     });
 
 });   

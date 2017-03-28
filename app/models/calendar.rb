@@ -55,7 +55,6 @@ class Calendar
 					weight << g.weight
 					vote=true if g.vote==true
 				end
-				puts vote
 				joinedRoom = (true if user_id>0 && user.rooms.where(id: room.first.id).first) || false
 				[room.first.id, info, gameList, gameIDs, joinedRoom, vote, weight]
 		end
