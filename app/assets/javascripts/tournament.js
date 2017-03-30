@@ -3,6 +3,7 @@ $(document).on("turbolinks:load", function(){
     var count=2;
     var tempcount;
     var gameWeight = {};
+    var room;
 
     $("input").focus(function(){
         $(this).css("background-color", "#cccccc");
@@ -41,8 +42,18 @@ $(document).on("turbolinks:load", function(){
         var vote = ($(this).find("#vote").val());
         var weight = ($(this).find("#weight").val());
         var w = weight.split(" ");
-
+        var uservote = ($(this).find("#uservote").val());
+        room = "";
+        room = ($(this).find("#id").val());
         list.text("");
+
+        buttons = (uservote!="true" ? 
+                ("<span class=\"input-group-btn\">"
+                + "<button class=\"btn btn-primary subtract-weight\" type=\"button\">-</button>"
+                + "<button class=\"btn btn-primary add-weight\" type=\"button\" style=\"display:none\">+</button>"
+                + "</span>") : (""));
+
+
         if (vote=="true"){
             for(var i=0; i<g.length-1; i++){
                 list.append("<li id=" + gid[i] +">"
@@ -53,10 +64,7 @@ $(document).on("turbolinks:load", function(){
                             + "value="
                             + w[i]
                             + " readonly=\"readonly\">"
-                            + "<span class=\"input-group-btn\">"
-                            + "<button class=\"btn btn-primary subtract-weight\" type=\"button\">-</button>"
-                            + "<button class=\"btn btn-primary add-weight\" type=\"button\" style=\"display:none\">+</button>"
-                            + "</span>"
+                            + buttons
                             + "</div>"
                             + "</li>");
                 gameWeight[gid[i]] = w[i];
@@ -121,7 +129,8 @@ $(document).on("turbolinks:load", function(){
             type : "patch",
             data : { games: game,
                      weights: weight,
-                     user: user }
+                     user: user,
+                     room: room }
         });
 
 

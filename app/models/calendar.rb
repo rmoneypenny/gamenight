@@ -48,6 +48,8 @@ class Calendar
 				gameList = []
 				gameIDs = []
 				vote = false
+				userroom = UserRoom.find_by(:room_id => room.first.id, :user_id => user_id)
+				uservote = !userroom.nil? ? (userroom.vote):("none")
 				weight = []
 				games.each do |g|
 					gameList << g.name + "!*!"
@@ -56,7 +58,7 @@ class Calendar
 					vote=true if g.vote==true
 				end
 				joinedRoom = (true if user_id>0 && user.rooms.where(id: room.first.id).first) || false
-				[room.first.id, info, gameList, gameIDs, joinedRoom, vote, weight]
+				[room.first.id, info, gameList, gameIDs, joinedRoom, vote, weight, uservote]
 		end
 	end
 

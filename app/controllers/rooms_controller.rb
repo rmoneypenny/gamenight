@@ -24,7 +24,8 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    if !@room.save
+    if game_params[:name].size==0 || !@room.save 
+      @game_error = game_params[:name].size==0 ? ("There must be at least one game entered"):(nil)
       render 'new'
     else
       @game = Game.new
@@ -52,8 +53,8 @@ class RoomsController < ApplicationController
     game = Game.new
     gameIDs = params[:games]
     gameWeights = params[:weights]
-    user = params[:user]
-
+    userroom = UserRoom.find_by(:room_id => params[:room], :user_id => params[:user])
+    userroom.update(:vote => true)
     game.multiUpdate(gameIDs, gameWeights)
     redirect_to index_path
 
