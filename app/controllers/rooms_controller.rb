@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+
+  include SessionsHelper
+
   def index
   end
 
@@ -6,7 +9,9 @@ class RoomsController < ApplicationController
    @room = Room.new
    @calendar = Calendar.new
    @game = Game.new
-  
+   @ownedRooms = Room.where(:admin => current_user.id)
+
+
     if params[:prevMonth]
       @month = Calendar.new(params[:prevMonth])
     end
@@ -32,6 +37,14 @@ class RoomsController < ApplicationController
       @game.submit(game_params[:name], game_params[:vote], game_params[:weight], @room.id)
       redirect_to index_path
     end
+  end
+
+  def update
+    valid = params.permit(:room_id, :password, datetime: [:year, :month, :day, :hour, :minute] )
+    dt = DateTime.new(valid[:datetime][:year].to_i, valid[:datetime][:month].to_i, valid[:datetime][:day].to_i, valid[:datetime][:hour].to_i, valid[:datetime][:minute].to_i)
+    room = Room.find_by(:id => valid[:room_id])
+    room.update(:datetime => dt, :password => valid[:password])
+    redirect_to setup_path
   end
 
   def userroom

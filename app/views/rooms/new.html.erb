@@ -40,10 +40,30 @@
 		<% end %>
 	<br>
 	<br>
-		Invite? checkbox
-	<br>
-		----usernames/email addresses
+	<div id="updateroom">
+		<% @ownedRooms.each do |r| %>
+			<div>
+				<%= r.datetime.strftime("%B") + " " + r.datetime.strftime("%-d") + ", " + r.datetime.strftime("%Y") + " at " + r.datetime.strftime("%l:%M%p") %> 
+				<button type="button" id="editRoom">Edit</button>
+				<button type="button" id="deleteRoom">Delete</button>
 
+				<br>
+				<div id="<%=r.id%>" style="display: none"%>
+					<%= form_tag setup_path, :method => :patch do %>
+						<%= hidden_field_tag(:room_id, r.id) %>
+						<%= label_tag :password %>
+						<%= password_field_tag :password%>
+						<br>
+						<%= select_datetime r.datetime, prefix: :datetime %>
+						<%= submit_tag "Update" %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+		<br>
+
+	                            
+	</div>
 
 
 </div>

@@ -8,8 +8,6 @@ class Game < ApplicationRecord
 
 
 	def submit(names, vote, weight, room_id)
-		# puts "11111111111111" if names.size==1
-		# puts "00000000000000" if names.size==0
 		names.each do |n|
 			vote ||= false
 			game = Game.new(:name => n.chomp, :vote => vote, :weight => weight, :room_id => room_id)

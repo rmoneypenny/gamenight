@@ -133,9 +133,20 @@ $(document).on("turbolinks:load", function(){
                      room: room }
         });
 
+    });
 
+
+    $("#updateroom").on("click", "#editRoom", function(){
+        var roomid = ($(this).siblings("div").attr("id"));
+        $("#"+roomid).toggle();
+    });
+
+    $("#updateroom").on("click", "#deleteRoom", function(){
+        alert("delete");
 
     });
+
+
 
 });   
 
