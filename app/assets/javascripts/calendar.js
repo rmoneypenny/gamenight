@@ -138,11 +138,14 @@ $(document).on("turbolinks:load", function(){
 
     $("#updateroom").on("click", "#editRoom", function(){
         var roomid = ($(this).siblings("div").attr("id"));
+        $("#"+roomid+"delete").hide();
         $("#"+roomid).toggle();
     });
 
     $("#updateroom").on("click", "#deleteRoom", function(){
-        alert("delete");
+        var roomid = ($(this).siblings("div").attr("id"));
+        $("#"+roomid).hide();
+        $("#"+roomid+"delete").toggle();
 
     });
 

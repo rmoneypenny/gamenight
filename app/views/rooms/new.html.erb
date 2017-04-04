@@ -6,11 +6,18 @@
 		<% end %>
 	<% end %>
 
-	<% if @game_error %>
-		<%= @game_error %>
+	<% if @error %>
+		<%= @error %>
 	<% end %>
 
 </div>
+
+<div id = "notice">
+	<% if @message %>
+		<%= @message %>
+		<% end %>
+</div>
+
 
 <div class="col-md-6"> 
 	<br>
@@ -56,6 +63,14 @@
 						<br>
 						<%= select_datetime r.datetime, prefix: :datetime %>
 						<%= submit_tag "Update" %>
+					<% end %>
+				</div>
+				<div id="<%=r.id%>delete" style="display:none">
+					<%= form_tag setup_path, :method => :delete do %>
+						<%= hidden_field_tag(:room_id, r.id) %>
+						<%= label_tag :password %>
+						<%= password_field_tag :password%>
+						<%= submit_tag "Confirm" %>
 					<% end %>
 				</div>
 			</div>

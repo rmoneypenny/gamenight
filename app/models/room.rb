@@ -6,4 +6,12 @@ class Room < ApplicationRecord
 	validates :admin, presence: true
 	validates :password, presence: true
 	validates :datetime, presence: true
+	validate :date_check
+
+
+	def date_check
+		errors.add("Date has passed", " ") if datetime < Date.today
+	end
+
+
 end

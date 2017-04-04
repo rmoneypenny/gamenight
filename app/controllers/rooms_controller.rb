@@ -29,8 +29,10 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+    @ownedRooms = Room.where(:admin => current_user.id)
+
     if game_params[:name].size==0 || !@room.save 
-      @game_error = game_params[:name].size==0 ? ("There must be at least one game entered"):(nil)
+      @error = game_params[:name].size==0 ? ("There must be at least one game entered"):(nil)
       render 'new'
     else
       @game = Game.new
@@ -42,9 +44,36 @@ class RoomsController < ApplicationController
   def update
     valid = params.permit(:room_id, :password, datetime: [:year, :month, :day, :hour, :minute] )
     dt = DateTime.new(valid[:datetime][:year].to_i, valid[:datetime][:month].to_i, valid[:datetime][:day].to_i, valid[:datetime][:hour].to_i, valid[:datetime][:minute].to_i)
-    room = Room.find_by(:id => valid[:room_id])
-    room.update(:datetime => dt, :password => valid[:password])
-    redirect_to setup_path
+    @room = Room.find_by(:id => valid[:room_id])
+    @ownedRooms = Room.where(:admin => current_user.id)
+
+    if @room.authenticate(valid[:password])
+      @room.update(:datetime => dt, :password => valid[:password])
+      @message = "Updated"
+      render 'new'
+    else
+      @error = "Invalid Password"
+      render 'new'
+    end
+  end
+
+  def destroy
+    @ownedRooms = Room.where(:admin => current_user.id)
+    @room = Room.find_by(:id => params[:room_id])
+    userroom = UserRoom.where(:room_id => params[:room_id])
+    games = Game.where(:room_id => params[:room_id])
+    if @room.authenticate(params[:password])
+      @message = "Deleted"
+
+      userroom.destroy_all
+      @room.destroy
+      games.destroy_all
+      render 'new'
+    else
+      @error = "Invalid Password"
+      render 'new'
+    end
+
   end
 
   def userroom
