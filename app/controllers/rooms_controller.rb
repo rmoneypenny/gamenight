@@ -83,7 +83,9 @@ class RoomsController < ApplicationController
   def createur
 
     @ur = UserRoom.new(userroom_params)
-    if !@ur.save
+    room = Room.find_by(:id => userroom_params[:room_id])
+    if !room.authenticate(params[:password]) || !@ur.save
+      @error = "Invalid Password" if !room.authenticate(params[:password])
       render 'userroom'
     else
       redirect_to index_path

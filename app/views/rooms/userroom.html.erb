@@ -5,6 +5,10 @@
 			<br>
 		<% end %>
 	<% end %>
+	<% if @error %>
+		<%= @error %>
+	<% end %>
+	
 </div>
 
 
@@ -20,6 +24,10 @@
 
 			<%= hidden_field_tag :user_id, current_user.id%> 
 			<%= hidden_field_tag :room_id, current_user.id, id: 'roomid'%>
+			<%= label_tag :password %>
+			<br>
+			<%= password_field_tag :password%>
+			<br>
 			<%= submit_tag "Join" %>
 
 		<% end %>
