@@ -13,7 +13,7 @@ $(document).on("turbolinks:load", function(){
     });
 
 
-
+    $('.calendarSuccess').css('cursor','pointer');
     $(document).on("click", ".calendarSuccess", function(){
         $("#gameList").show();
         var list = $("#list")
@@ -55,6 +55,10 @@ $(document).on("turbolinks:load", function(){
 
 
         if (vote=="true"){
+            list.append("Remove "
+                        + count
+                        + " votes from the games you do not want to play and add them to ones"
+                        + " that you do. ");
             for(var i=0; i<g.length-1; i++){
                 list.append("<li id=" + gid[i] +">"
                             + "<div class=\"input-group input-group-sm\">"
@@ -139,13 +143,13 @@ $(document).on("turbolinks:load", function(){
     $("#updateroom").on("click", "#editRoom", function(){
         var roomid = ($(this).siblings("div").attr("id"));
         $("#"+roomid+"delete").hide();
-        $("#"+roomid).toggle();
+        $("#"+roomid).slideToggle();
     });
 
     $("#updateroom").on("click", "#deleteRoom", function(){
         var roomid = ($(this).siblings("div").attr("id"));
         $("#"+roomid).hide();
-        $("#"+roomid+"delete").toggle();
+        $("#"+roomid+"delete").slideToggle();
 
     });
 

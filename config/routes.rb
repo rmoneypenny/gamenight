@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get '/join', :to => 'rooms#userroom'
   post '/join', :to => 'rooms#createur'
 
+  get 'tools', :to => 'games#tools'
+
 end

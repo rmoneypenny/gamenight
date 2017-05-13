@@ -7,13 +7,20 @@
 	</div>
 	<br>
  	<div id="buttonNumber">
-
-		<ul id="joinedList" style="list-style-type:none">
-			</li> -Select a <span style="background-color: #FB9431">date</span>
- from the calendar -></li>
- 			<li> -Join a <span style="background-color: #b5ccf2">game night</span> with the Join tab </li>
+ 		<ul id="joinedList" style="list-style-type:none">
+			<% if current_user %>
+				</li> -Select a <span style="background-color: #FB9431">date</span>
+	 				from the calendar -></li>
+	 			<li> -Join an <span style="background-color: #b5ccf2">event</span> with the Join tab </li>
+			
+		<% else %>
+			Welcome to Game Night!
+			<br>
+			You can get started by logging in and either creating a game night or joining an existing event.
+			<br>
+			Be sure to get the password off of the organizer to join the event.
+		<% end %>
 		</ul> 
-
 	</div>
 	<div id="submitWeight" style="display: none">
 		<button class="btn btn-primary weight-button" data-user="<%=userid%>">Submit</button>

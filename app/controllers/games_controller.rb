@@ -1,4 +1,7 @@
 class GamesController < ApplicationController
-  def index
+  
+  def tools
+
   end
+
 end

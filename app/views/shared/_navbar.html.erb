@@ -8,7 +8,7 @@
         <li class="<%= 'active' if current_page?(setup_path) %>"> <%= link_to "Setup", setup_path %> </a> </li>
       <li class="<%= 'active' if current_page?(join_path) %>"> <%= link_to "Join", join_path %> </a> </li>
       <% end %>
-      <li> <a href="#"> Boardgame Tools </a> </li>
+      <li class="<%= 'active' if current_page?(tools_path) %>"> <%= link_to "Boardgame Tools", tools_path %> </li>
       <li class="<%= 'active' if current_page?(tournament_path) %>"> <%= link_to "Tournament Builder", tournament_path %> </a> </li>
     </ul>
 
