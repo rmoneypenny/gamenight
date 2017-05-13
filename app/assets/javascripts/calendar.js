@@ -13,7 +13,6 @@ $(document).on("turbolinks:load", function(){
     });
 
 
-    $('.calendarSuccess').css('cursor','pointer');
     $(document).on("click", ".calendarSuccess", function(){
         $("#gameList").show();
         var list = $("#list")
