@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 		if !@user.save
 			render 'new'
 		else
+			session[:user_id] = @user.id
+			flash[:notice] = "Logged In"
 			redirect_to index_path
 		end
 		

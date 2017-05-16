@@ -47,6 +47,7 @@ class Calendar
 				games = Game.where(room_id: room.first.id)
 				gameList = []
 				gameIDs = []
+				playerList = [] 
 				vote = false
 				userroom = UserRoom.find_by(:room_id => room.first.id, :user_id => user_id)
 				uservote = !userroom.nil? ? (userroom.vote):("none")

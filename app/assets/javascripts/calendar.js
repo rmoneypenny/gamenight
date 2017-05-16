@@ -85,6 +85,7 @@ $(document).on("turbolinks:load", function(){
         };
         var info = $(this).find("#info").val();
         $("#joinedGameDate").text(info);
+        $("#players").show();
     });
        
 
