@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
 
-  include SessionsHelper
+
+  skip_before_action :require_login, only: [:index]
 
   def index
 
@@ -20,6 +21,7 @@ class RoomsController < ApplicationController
   end
 
   def new
+
    @room = Room.new
    @calendar = Calendar.new
    @game = Game.new
