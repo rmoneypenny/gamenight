@@ -3,6 +3,20 @@ class RoomsController < ApplicationController
   include SessionsHelper
 
   def index
+
+    if params[:room_id]
+      @rooms = UserRoom.where(:room_id => params[:room_id])
+      @players = ["Players:"]
+      @rooms.each do |r|
+        @players << User.find(r.user_id).name
+      end
+
+      respond_to do |format|
+       format.js 
+      end
+    end
+  
+
   end
 
   def new
@@ -19,7 +33,7 @@ class RoomsController < ApplicationController
     if params[:nextMonth]
       @month = Calendar.new(params[:nextMonth])
     end
-  
+
     respond_to do |format|
   	 format.html
   	 format.js 

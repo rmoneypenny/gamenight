@@ -1,6 +1,6 @@
 $(document).on("turbolinks:load", function(){
 
-    var count=2;
+    var count=1;
     var tempcount;
     var gameWeight = {};
     var room;
@@ -52,12 +52,15 @@ $(document).on("turbolinks:load", function(){
                 + "<button class=\"btn btn-primary add-weight\" type=\"button\" style=\"display:none\">+</button>"
                 + "</span>") : (""));
 
+        votemessage = (uservote!="true" ? 
+                        ("Remove "
+                        + count
+                        + " vote from the game you do not want to play and add "
+                        + count
+                        + " to one that you do. ") : (""));
 
         if (vote=="true"){
-            list.append("Remove "
-                        + count
-                        + " votes from the games you do not want to play and add them to ones"
-                        + " that you do. ");
+            list.append(votemessage);
             for(var i=0; i<g.length-1; i++){
                 list.append("<li id=" + gid[i] +">"
                             + "<div class=\"input-group input-group-sm\">"
@@ -86,6 +89,11 @@ $(document).on("turbolinks:load", function(){
         var info = $(this).find("#info").val();
         $("#joinedGameDate").text(info);
         $("#players").show();
+        $.ajax({
+            url : "/index",
+            type : "get",
+            data: {room_id: room}
+        });
     });
        
 
