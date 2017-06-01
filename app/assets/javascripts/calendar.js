@@ -162,6 +162,41 @@ $(document).on("turbolinks:load", function(){
     });
 
 
+//Tournament JS
+
+    $(document).ready(function() {
+        select = $("#select");
+        select.append("Please select the number of players<br>")
+        options = "<select id=\"players\">";
+        for(i=2; i<=8; i++){
+            options += "<option value=" + i + ">" + i + "</option>";
+         }
+        options += "</select><br>";
+        select.append(options);
+        select.append("<input id=\"losers\" type=\"checkbox\" />Losers bracket? <br>"
+                    + "<button id=\"normal\"> Normal </button>"
+                    + "<button id=\"revenge\"> Revenge </button>");
+    });
+
+    $("#normal").click(function(){
+        //build a normal tournament
+    });
+    $("#revenge").click(function(){
+        var players = $("#players").val();
+        var nameboxes = "";
+        for(i=1; i<=players; i++){
+            nameboxes += "Player " + i + "<input type=\"text\" id=\"name" + i + "\"> <br>";
+            for(j=1;j<=players*players; j++){
+                nameboxes += "Character " + j + "<input type=\"text\" id=\"character" + i + "w" + j + "\"> <br>"; 
+            }
+        }
+        nameboxes += "<br><button id=\"createrevenge\"> Create </button>"
+        $("#select").text("");
+        $("#select").append(nameboxes);
+    });
+
+
+
 
 });   
 
