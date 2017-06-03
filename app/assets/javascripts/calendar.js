@@ -168,6 +168,19 @@ var players = 0;
 var playernames = [];
 var characters = [];
 
+    $.characterList = function(){ 
+        clist = [];
+        for(i=0; i<players*players; i++){
+            for(j=0; j<players; j++){
+                clist[(i*j)+((players*players)*j)]
+                i=1 ; j=1 ; players=3
+                0,9,18
+                0
+            }
+        }
+        return clist;
+    }
+        
     $(document).ready(function() {
         select = $("#select");
         select.append("Please select the number of players<br>")
@@ -180,6 +193,7 @@ var characters = [];
         select.append("<input id=\"losers\" type=\"checkbox\" />Losers bracket? <br>"
                     + "<button id=\"normal\"> Normal </button>"
                     + "<button id=\"revenge\"> Revenge </button>");
+
     });
 
     $("#normal").click(function(){
@@ -201,8 +215,7 @@ var characters = [];
     });
 
 
-    $(document).on("click", "#createrevenge", function(){
-        //tournament = "<table style=\"width:100%\">";
+    $("#select").on("click", "#createrevenge", function(){
         $("#tournament").text("")
         tournament = "";
         for(i=1; i<=players; i++){
@@ -212,20 +225,44 @@ var characters = [];
              }
         }
         $("#select").text("");
-        for(k=0; k<players*players*players; k++){
-            tournament += characters[k] + "---------"+"<br>";
-            // if((i+1)%players==0){
-            //     tournament += "<br>";
-            // }
+        //create tournament divs
+        for(m=0; m<parseInt(players)+1; m++){
+            tournament += "<div class=\"col-md-1\">";
+            for(k=0; k<players*players*players; k++){
+                tournament += "<div id=\""+m+k+"\">";
+                if((k+1)%players==0){
+                    tournament += "<br>";
+                }
+                if((k+1)%(players*players)==0 && k+1 != players*players*players) {
+                   tournament += "<br><br>";
+                }
+                tournament += "</div>";
+            }
+            tournament += "</div>"
         }
-        $(alert(characters.length));
-        $(alert(players*players*players));
+        $(alert($.characterList()));
+
         $("#tournament").append(tournament);
     });
 
 
 });   
+//
+        // for(m=0; m<parseInt(players)+1; m++){
+        //     tournament += "<div class=\"col-md-1\">";
+        //     for(k=0; k<players*players*players; k++){
+        //         tournament += characters[k] + "---------"+"<br>";
+        //         if((k+1)%players==0){
+        //             tournament += "<br>";
+        //         }
+        //         if((k+1)%(players*players)==0 && k+1 != players*players*players) {
+        //             tournament += "=========<br><br>";
+        //         }
+        //     }
+        //     tournament += "</div>"
+        // }
 
+//table
         // for(i=1; i<=players*players; i++){
         //     tournament += "<tr>";
         //     for(j=1; j<=parseInt(players)+1; j++){
