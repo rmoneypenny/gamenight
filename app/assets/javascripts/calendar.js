@@ -2,7 +2,7 @@ $(document).on("turbolinks:load", function(){
 
     var count=1;
     var tempcount;
-    var gameWeight = {};
+    var gameWeight = [];
     var room;
 
     $("input").focus(function(){
@@ -32,7 +32,7 @@ $(document).on("turbolinks:load", function(){
 
     $(document).on("click", ".calendarJoin", function(){
         tempcount = count;
-        gameWeight = {};
+        gameWeight = [];
         var list = $("#joinedList");
         var games = ($(this).find("#games").val());
         var g = games.split('!*!');
@@ -164,6 +164,10 @@ $(document).on("turbolinks:load", function(){
 
 //Tournament JS
 
+var players = 0;
+var playernames = [];
+var characters = [];
+
     $(document).ready(function() {
         select = $("#select");
         select.append("Please select the number of players<br>")
@@ -181,8 +185,9 @@ $(document).on("turbolinks:load", function(){
     $("#normal").click(function(){
         //build a normal tournament
     });
+
     $("#revenge").click(function(){
-        var players = $("#players").val();
+        players = $("#players").val();
         var nameboxes = "";
         for(i=1; i<=players; i++){
             nameboxes += "Player " + i + "<input type=\"text\" id=\"name" + i + "\"> <br>";
@@ -190,14 +195,45 @@ $(document).on("turbolinks:load", function(){
                 nameboxes += "Character " + j + "<input type=\"text\" id=\"character" + i + "w" + j + "\"> <br>"; 
             }
         }
-        nameboxes += "<br><button id=\"createrevenge\"> Create </button>"
+        nameboxes += "<br><button id=\"createrevenge\"> Create </button>";
         $("#select").text("");
         $("#select").append(nameboxes);
     });
 
 
+    $(document).on("click", "#createrevenge", function(){
+        //tournament = "<table style=\"width:100%\">";
+        $("#tournament").text("")
+        tournament = "";
+        for(i=1; i<=players; i++){
+             playernames.push($("#name"+i).val());
+             for(j=1; j<=players*players; j++){
+                characters.push($("#character"+i+"w"+j).val());
+             }
+        }
+        $("#select").text("");
+        for(k=0; k<players*players*players; k++){
+            tournament += characters[k] + "---------"+"<br>";
+            // if((i+1)%players==0){
+            //     tournament += "<br>";
+            // }
+        }
+        $(alert(characters.length));
+        $(alert(players*players*players));
+        $("#tournament").append(tournament);
+    });
 
 
 });   
 
+        // for(i=1; i<=players*players; i++){
+        //     tournament += "<tr>";
+        //     for(j=1; j<=parseInt(players)+1; j++){
+
+        //       tournament += "<td></td>" ;
+        //     }
+        //     tournament += "</tr>";
+        // }
+        // tournament += "</table>";
+        // $("#tournament").append(tournament);
 
