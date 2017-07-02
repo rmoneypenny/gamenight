@@ -167,19 +167,34 @@ $(document).on("turbolinks:load", function(){
 var players = 0;
 var characters = [];
 var playerchar = [];
+var matches = [];
 
-    $.characterList = function(){ 
-        clist = [];
-        for(i=0; i<players*players; i++){
+    function buildMatchups() {
+        //[ [name,[characters]] , [name,[characters]] , [name,[characters]] ]
+        //loop through and build the first round matches
+        for(i=0; i<players; i++){
+            //loop through and take 1 character from each player
+            pc = []
             for(j=0; j<players; j++){
-                clist[(i*j)+((players*players)*j)]
-                i=1 ; j=1 ; players=3
-                0,9,18
-                0
+                //random character
+                random = Math.floor(Math.random() * playerchar[j][1].length);
+                c = playerchar[j][1][random];
+                index = playerchar[j][1].indexOf(c);
+                //push 1 character from each player
+                pc.push(playerchar[j][0] + c);
+                //remove that player so no duplicates
+                playerchar[j][1].splice(index,1);
             }
+            //push the characters into a match
+            matches.push(pc);
         }
-        return clist;
+        //finals place holder
+        matches.push([]);
+        //winner winner chicken something
+        matches.push([]);
+        return matches[0];
     }
+   
         
     $(document).ready(function() {
         select = $("#select");
@@ -228,12 +243,13 @@ var playerchar = [];
              temparray.push(characters);
              playerchar.push(temparray);
         }
+
+
+
+
         //$("#select").text(myFunction(1,2));
  
-        // function myFunction(p1, p2) {
-        //     return p1 * p2;              // The function returns the product of p1 and p2
-        // }
-
+ $(alert(buildMatchups()));
         //rework this whole thing
         // for (m=0; m<players+2; m++){
         //     tournament+=""
