@@ -172,16 +172,18 @@ var matches = [];
     function buildMatchups() {
         //[ [name,[characters]] , [name,[characters]] , [name,[characters]] ]
         //loop through and build the first round matches
+        finals = []
         for(i=0; i<players; i++){
             //loop through and take 1 character from each player
             pc = []
+            finals.push("finals"+i.toString())
             for(j=0; j<players; j++){
                 //random character
                 random = Math.floor(Math.random() * playerchar[j][1].length);
                 c = playerchar[j][1][random];
                 index = playerchar[j][1].indexOf(c);
                 //push 1 character from each player
-                pc.push(playerchar[j][0] + c);
+                pc.push(playerchar[j][0] + ": "+ c);
                 //remove that player so no duplicates
                 playerchar[j][1].splice(index,1);
             }
@@ -189,12 +191,44 @@ var matches = [];
             matches.push(pc);
         }
         //finals place holder
-        matches.push([]);
+        matches.push(finals);
         //winner winner chicken something
-        matches.push([]);
-        return matches[0];
+        matches.push("winner");
     }
    
+
+   function buildBrackets(){
+        buildMatchups();
+        //create row
+        brackets = "";
+        winner = Math.floor(players/2);
+        for(i=0; i<players; i++){
+            brackets += "<div class=\"row\">";
+            //create column
+            brackets +=   "<div class=\"col-md-2\">";
+             for(j=0; j<players; j++){
+                brackets += "<div id=" + i.toString() + j.toString() + ">"
+                         + matches[i][j] + "</div> ";
+                //finals
+                if (j==players-1){
+                    brackets +=   "</div><div class=\"col-md-2\"> <br><div id=" 
+                             + i.toString() + j.toString() +"f>" + matches[players][i] + "</div>";
+                };
+                //winner!
+                if (i==winner && j==players-1){
+                  brackets +=   "</div><div class=\"col-md-2\"> <br> <div id=winner>"
+                           + matches[parseInt(players)+1] +"</div>";  
+                }
+             }
+            //1st column ender 
+            brackets += "</div>"
+            //row ender
+            brackets += "</div> <br>";
+
+        }
+        return brackets;
+   }
+
         
     $(document).ready(function() {
         select = $("#select");
@@ -231,7 +265,7 @@ var matches = [];
 
 
     $("#select").on("click", "#createrevenge", function(){
-        $("#tournament").text("")
+        $("#tournament").text("");
         tournament = "";
         for(i=1; i<=players; i++){
             temparray = [];
@@ -243,37 +277,17 @@ var matches = [];
              temparray.push(characters);
              playerchar.push(temparray);
         }
+        $("#select").text("");
+        $("#tournament").append(buildBrackets());
 
 
-
-
-        //$("#select").text(myFunction(1,2));
- 
- $(alert(buildMatchups()));
-        //rework this whole thing
-        // for (m=0; m<players+2; m++){
-        //     tournament+=""
-        // }
-
-        //create tournament divs
-        // for(m=0; m<parseInt(players)+1; m++){
-        //     tournament += "<div class=\"col-md-1\">";
-        //     for(k=0; k<players*players*players; k++){
-        //         tournament += "<div id=\""+m+k+"\">";
-        //         if((k+1)%players==0){
-        //             tournament += "<br>";
-        //         }
-        //         if((k+1)%(players*players)==0 && k+1 != players*players*players) {
-        //            tournament += "<br><br>";
-        //         }
-        //         tournament += "</div>";
-        //     }
-        //     tournament += "</div>"
-        // }
-        // $(alert($.characterList()));
-
-        // $("#tournament").append(tournament);
     });
+
+
+    // $("#select").on("click", "#createrevenge", function(){
+
+
+    // });
 
 
 });   
