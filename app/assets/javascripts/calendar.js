@@ -168,6 +168,8 @@ var players = 0;
 var characters = [];
 var playerchar = [];
 var matches = [];
+var history = [];
+var buttonPlacement = [];
 
     function buildMatchups() {
         //[ [name,[characters]] , [name,[characters]] , [name,[characters]] ]
@@ -176,7 +178,7 @@ var matches = [];
         for(i=0; i<players; i++){
             //loop through and take 1 character from each player
             pc = []
-            finals.push("finals"+i.toString())
+            finals.push("finals")
             for(j=0; j<players; j++){
                 //random character
                 random = Math.floor(Math.random() * playerchar[j][1].length);
@@ -189,7 +191,9 @@ var matches = [];
             }
             //push the characters into a match
             matches.push(pc);
+            buttonPlacement.push(true);
         }
+        buttonPlacement.push(false);
         //finals place holder
         matches.push(finals);
         //winner winner chicken something
@@ -199,6 +203,12 @@ var matches = [];
 
    function buildBrackets(){
         buildMatchups();
+        advanceButton = "<button type=\"button\" class=\"btn btn-default btn-xs\">"
+                      + "<span id=\"advance\" class=\"glyphicon glyphicon-triangle-right\" aria-hidden=\"true\"></span>"
+                      + "</button>";
+        loseButton = "<button type=\"button\" class=\"btn btn-default btn-xs\">"
+                   + "<span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"></span>"
+                   + "</button>";
         //create row
         brackets = "";
         winner = Math.floor(players/2);
@@ -208,15 +218,18 @@ var matches = [];
             brackets +=   "<div class=\"col-md-2\">";
              for(j=0; j<players; j++){
                 brackets += "<div id=" + i.toString() + j.toString() + ">"
-                         + matches[i][j] + "</div> ";
+                         + (buttonPlacement[i] ? (advanceButton) : ("")) + matches[i][j] + "</div> ";
                 //finals
                 if (j==players-1){
                     brackets +=   "</div><div class=\"col-md-2\"> <br><div id=" 
-                             + i.toString() + j.toString() +"f>" + matches[players][i] + "</div>";
+                             + players.toString() + i.toString() +"f>" 
+                             + (buttonPlacement[players] ? (advanceButton) : ("")) + matches[players][i] 
+                             + "</div>";
                 };
                 //winner!
                 if (i==winner && j==players-1){
-                  brackets +=   "</div><div class=\"col-md-2\"> <br> <div id=winner>"
+                  brackets +=   "</div><div class=\"col-md-2\"> <br> <div id="  
+                           + (parseInt(players)+1).toString() + "0>"
                            + matches[parseInt(players)+1] +"</div>";  
                 }
              }
@@ -228,6 +241,30 @@ var matches = [];
         }
         return brackets;
    }
+
+    function advancePlayer(pc){
+        match = parseInt(pc[0]);
+        player = parseInt(pc[1]);
+        character = matches[match][player];
+        matches[match][player] = "--";
+        if (pc[2]==null){
+            matches[players][match] = character;
+            buttonPlacement[match] = false;
+            finals = true;
+        }
+        else{
+            matches[parseInt(players)+1] = character;
+            finals = false
+            buttonPlacement[players] = finals;
+        }
+        //check if the lower bracket is finished
+        for(i=0; i<players; i++){
+            (buttonPlacement[i] ? (finals=false) : (""));
+        }
+        buttonPlacement[players] = finals;
+        $("#tournament").text("");
+        $("#tournament").append(buildBrackets());
+    }
 
         
     $(document).ready(function() {
@@ -283,7 +320,9 @@ var matches = [];
 
     });
 
-
+    $("#tournament").on("click", "#advance", function(){
+        advancePlayer($(this).closest("div").attr("id"));
+    })
     // $("#select").on("click", "#createrevenge", function(){
 
 
