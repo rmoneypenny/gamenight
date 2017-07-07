@@ -276,7 +276,7 @@ var buttonPlacement = [];
          }
         options += "</select><br>";
         select.append(options);
-        select.append("<input id=\"losers\" type=\"checkbox\" />Losers bracket? <br>"
+        select.append("<input id=\"losers\" type=\"checkbox\" />Double Elimination? <br>"
                     + "<button id=\"normal\"> Normal </button>"
                     + "<button id=\"revenge\"> Revenge </button>");
 
