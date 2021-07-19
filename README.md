@@ -1,1 +1,1 @@
-App to schedule a date and time to get together with friends and family to play board and video games. Allows the players to vote on what games they would like to play. This is my third rails project with the goal of implementing Bootstrap and getting more comfortable using Javascript. The Javascripting in this is a mess but I learned some lessons I can apply to the next project. App is hosted on Heroku at https://gamenightwv.herokuapp.com/index
+
